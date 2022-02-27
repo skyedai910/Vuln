@@ -10,7 +10,7 @@
 
 **Hardware Link**: http://www.dlinktw.com.tw/techsupport/download.ashx?file=2663
 
-**Exploit Author**: [SkYe231@Hillstone](mailto:ext-lhliang@Hillstonenet.com), Akast@Hillstone, GD@Hillstone
+**Exploit Author**: [SkYe231@Hillstone](mailto:ext-lhliang@Hillstonenet.com), Akast@Hillstone, GD@Hillstone, Amao@Hillstone
 
 ## detail
 
