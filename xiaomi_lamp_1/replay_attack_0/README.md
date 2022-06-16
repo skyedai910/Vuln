@@ -1,5 +1,9 @@
 # Xiaomi lamp 1 replay_attack
 
+**CVE ID**:
+
+**CVE ID**: CVE-2022-31277
+
 **CNVD ID**: CNVD-2022-08945
 
 **Vender**: Xiaomi
