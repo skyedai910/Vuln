@@ -1,6 +1,6 @@
 # MERCURY MIPC351-4 command_execution
 
-**CVE ID**: 
+**CVE ID**: CVE-2022-31849
 
 **Vender**: MERCURY
 
